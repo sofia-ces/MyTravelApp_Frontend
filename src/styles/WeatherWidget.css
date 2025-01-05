@@ -1,0 +1,126 @@
+/* Global styles for weather */
+.weather-widget {
+    background: #ffffff;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    overflow: hidden;
+    margin-top: 20px; /* Add spacing above the widget */
+  }
+  
+  .weather-widget-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .search-form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .city-input {
+    width: 70%;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+  
+  .city-input:focus {
+    border-color: #007bff;
+  }
+  
+  .search-button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  /* Weather information styling */
+  .weather-info {
+    margin-top: 20px;
+  }
+  
+  .city-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .weather-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .temperature {
+    font-size: 36px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .description {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .weather-icon img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .weather-widget {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .search-form {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .city-input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .search-button {
+      width: 100%;
+    }
+  
+    .weather-details {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .temperature {
+      font-size: 48px;
+    }
+  
+    .description {
+      font-size: 18px;
+    }
+  }
