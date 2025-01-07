@@ -1,7 +1,7 @@
 // src/services/foursquareService.ts
 import axios from 'axios';
 
-const FOURSQUARE_API_KEY = "fsq3wCIzNwSaWOG4J5rGEBv2l6Fnm1i0hpI1v3GG6/IsJRk=";
+const FOURSQUARE_API_KEY = "YOUR-API-KEY";
 
 export const fetchLocationDetails = async (location: string) => {
   try {

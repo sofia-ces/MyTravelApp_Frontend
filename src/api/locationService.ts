@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 
-const GEOPAFY_API_KEY = '67c96c9029e04e2fa2da28cbbc25a2f8'; // Replace with your Geoapify API key
+const GEOPAFY_API_KEY = 'YOUR-API-KEY'; // Replace with your Geoapify API key
 const BASE_URL = 'https://api.geoapify.com/v1/geocode/search';
 
 export const fetchLocationDetails = async (location: string) => {
