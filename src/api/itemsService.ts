@@ -10,6 +10,11 @@ export interface User {
   updated_at?: string;
 }
 
+export const login = async (credentials: { email: string; password: string }) => {
+  const response = await api.post('/login', credentials);
+  return response.data; // Assuming the response contains user info and a token
+};
+
 // Fetch users with optional sorting and filtering
 export const fetchUsers = async (params?: { sortBy?: string; sortOrder?: 'asc' | 'desc'; filter?: string }) => {
   const response = await api.get('/list', { params });

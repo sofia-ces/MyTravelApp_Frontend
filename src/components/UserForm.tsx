@@ -36,7 +36,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit, initialData, onClose }) =
       <div className="overlay">
         <div className="modal">
           <form onSubmit={handleSubmit}>
-            <h1>{initialData ? 'Update User' : 'Create User'} Information</h1>
+            <h2>{initialData ? 'Update User' : 'Create User'} Information</h2>
             <input
               type="text"
               placeholder="Name"

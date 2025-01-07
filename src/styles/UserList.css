@@ -3,11 +3,11 @@
 
 /* Ensure the body fills the full height */
 body {
+  align-items: center;
   height: 100vh;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+ 
+
   background: linear-gradient(to right, #f8f9fa, #dcdcdc); /* Subtle background gradient */
   font-family: 'Roboto', sans-serif; /* Professional font */
   color: #333; /* Professional dark text color */
@@ -15,23 +15,62 @@ body {
 
 /* Wrap the table container to center it */
 .user-list-container {
-  width: 100%;
-  max-width: 2000px;
-  margin: 0 auto;
+  width: 100%; /* Full width */
+  max-width: 100%; /* Ensure no extra spacing */
+  padding: 20px; /* Optional padding */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  padding: 20px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+ 
+}
+
+.currency-list-container {
+  margin: 30px 0;
+  width: 100%; /* Full width */
+  max-width: 100%; /* Ensure no extra spacing */
+  padding: 20px; /* Optional padding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+ 
+}
+.currency-list{
+  textAlign: 'center';
+  padding: '20px';
+  background: '#f7f7f7';
+  borderRadius: '8px'
+}
+
+.login-list-container {
+  width: 25%; /* Full width */
+  max-width: 100%; /* Ensure no extra spacing */
+  padding: 10px; /* Optional padding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+ 
+ 
+}
+/* Wrap the table container to center it */
+.user-travel-container {
+  width: 70%; /* Full width */
+  max-width: 100%; /* Ensure no extra spacing */
+  padding: 20px; /* Optional padding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+ 
 }
 
 .filter-container {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .filter-container input,
@@ -179,7 +218,7 @@ button:hover {
 /* Optional: For responsive design */
 @media (max-width: 768px) {
   .user-list-container {
-    width: 90%;
+    width: 100%;
   }
 
   table {
