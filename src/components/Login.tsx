@@ -26,6 +26,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         setLoginError('');
         const { token } = data; // Assuming the API response contains a token
         onLoginSuccess(token); // Pass the token to App
+        
       }
     } catch (error: any) {
       setLoginError(error.response?.data?.message || 'Login failed. Please try again.');

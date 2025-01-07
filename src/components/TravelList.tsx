@@ -89,16 +89,16 @@ const TravelList: React.FC = () => {
     }
   };
 
-  const handleCreateUser = async (newTravel: any) => {
+ const handleCreateUser = async (newUser: any) => {
     try {
-      const createdUser = await createTravel(newTravel);
-      const newTravel = [...users, createdUser];
-      setUsers(newTravel);  // Update the original list
-      setFilteredUsers(newTravel);  // Update the filtered list as well
+      const createdUser = await createTravel(newUser);
+      const newUsers = [...users, createdUser];
+      setUsers(newUsers);  // Update the original list
+      setFilteredUsers(newUsers);  // Update the filtered list as well
       setShowModal(false);
       setCurrentUser(null);
     } catch (error) {
-      console.error('Error creating user:', error);
+      console.error('Error creating travel plan:', error);
     }
   };
 

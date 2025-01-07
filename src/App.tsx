@@ -14,6 +14,8 @@ import TravelImageGallery from './components/TravelImageGallery';
 import WikipediaWidget from './components/WikipediaWidget';
 import CurrencyConverter from './components/CurrencyConverter';
 import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+
 
 const App: React.FC = () => {
 
@@ -22,27 +24,31 @@ const App: React.FC = () => {
   const [location, setLocation] = useState<string>('Palawan');
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
 
-
   //Login 
   const queryClient = useQueryClient();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [authToken, setAuthToken] = useState<string | null>(null);
-  const handleLoginSuccess = () => {
-  // const handleLoginSuccess = (token: string) => {
-    // setAuthToken(token);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [authToken, setAuthToken] = useState<string | null>(null);
+  //const handleLoginSuccess = () => {
+  const handleLoginSuccess = (token: string) => {
+     setAuthToken(token);
     setIsLoggedIn(true);
-    // localStorage.setItem('authToken', token); // Store the token for persistence
+     localStorage.setItem('authToken', token); // Store the token for persistence
   };
 
   const handleLogout = () => {
-    // setAuthToken(null);
+    setAuthToken(null);
     setIsLoggedIn(false);
-    // localStorage.removeItem('authToken'); // Clear the token
+    localStorage.removeItem('authToken'); // Clear the token
   };
 
 
   useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setAuthToken(token);
+      setIsLoggedIn(true);
+    }
     const timer = setInterval(() => {
       setCurrentTime(new Date().toLocaleTimeString());
     }, 1000);
@@ -91,9 +97,6 @@ const App: React.FC = () => {
   };
 
 
-
-
-
   if (isLoading) return <div>Loading...</div>;
 
 
@@ -107,7 +110,7 @@ const App: React.FC = () => {
             <div className="user-info">
               <img
                 className="user-image"
-                src="https://via.placeholder.com/100"
+                src="https://via.placeholder.com/102"
                 alt="User Avatar"
               />
               <div className="user-name">John Doe</div>
@@ -136,7 +139,7 @@ const App: React.FC = () => {
                   </Link>
                 </li>
                 <li>
-                 <Link to="">
+                 <Link to="/group-plans">
                     <h3>
                       <i className="far fa-comments"></i> Group Plans
                     </h3>
@@ -171,7 +174,7 @@ const App: React.FC = () => {
                 <Route
                   path="/user-list"
                   element={
-                    <>
+                    <> <ProtectedRoute isLoggedIn={isLoggedIn}>
                       {isFormVisible && (
                         <UserForm
                           onSubmit={handleFormSubmit}
@@ -185,7 +188,7 @@ const App: React.FC = () => {
                           onEdit={handleEditClick}
                           onDelete={handleDelete}
                         />
-                      </div>
+                      </div>   </ProtectedRoute>
                     </>
                   }
                 />
@@ -193,7 +196,7 @@ const App: React.FC = () => {
                 <Route
                   path="/travel-plans"
                   element={
-                    <>
+                    <> <ProtectedRoute isLoggedIn={isLoggedIn}>
                       {isFormVisible && (
                         <TravelForm
                           onSubmit={handleFormSubmit}
@@ -210,14 +213,26 @@ const App: React.FC = () => {
                         <WeatherWidget />
                         <CurrencyConverter />
                         {/* <Currency/> */}
-                      </div>
+                      </div>   </ProtectedRoute>
                     </>
                   }
                 />
+
+            <Route
+                  path="/group-plans"
+                  element={
+                    <> 
+                        <div className="user-list-container">
+                       <h4>This feature is still under construction, but we'll let you know as soon as it's ready.</h4> 
+                         </div>
+                    </>
+                  }
+                />
+
                 <Route
                   path="/weather-info"
                   element={
-                    <>
+                    <> <ProtectedRoute isLoggedIn={isLoggedIn}>
                       <div className="row-container">
                         <div className="right-column">
                           <WikipediaWidget />
@@ -232,11 +247,11 @@ const App: React.FC = () => {
                           />
                           <TravelImageGallery location={location} />
                         </div>
-                      </div>
+                      </div>   </ProtectedRoute>
                     </>
                   }
                 />
-                <Route path="*" element={<Navigate to="/user-list" />} />
+                <Route path="*" element={<Navigate to="/dashboard" />} />
               </Routes>
             </div>
           </div>
