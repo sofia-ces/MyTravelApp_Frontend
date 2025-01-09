@@ -12,8 +12,9 @@ const LocationSearch: React.FC = () => {
       const data = await fetchLocationDetails(location);
       setLocationData(data);
       setError('');
-    } catch (err) {
+    } catch (error) {
       setError('Failed to fetch location details');
+      console.error('Failed to fetch location details',error);
       setLocationData(null);
     }
   };

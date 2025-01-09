@@ -1,9 +1,9 @@
 
-import { User } from '../api/travelService';
+import { Travel } from '../api/travelService';
 
 interface UserFormProps {
-  onSubmit: (user: User) => void;
-  initialData?: User;
+  onSubmit: (user: Travel) => void;
+  initialData?: Travel;
   onClose: () => void;
 }
 

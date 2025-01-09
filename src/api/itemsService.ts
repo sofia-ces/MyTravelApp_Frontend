@@ -1,5 +1,6 @@
 import { api } from './api';
 
+
 export interface User {
   id?: number;
   name: string;
@@ -10,23 +11,39 @@ export interface User {
   updated_at?: string;
 }
 
-export const login = async (credentials: { email: string; password: string }) => {
-  const response = await api.post('/login', credentials);
-  return response.data; // Assuming the response contains user info and a token
-};
-
 // Fetch users with optional sorting and filtering
-export const fetchUsers = async (params?: { sortBy?: string; sortOrder?: 'asc' | 'desc'; filter?: string }) => {
-  const response = await api.get('/list', { params });
-  return response.data.data;
+// export const fetchUsers = async (params?: { sortBy?: string; sortOrder?: 'asc' | 'desc'; filter?: string }) => {
+//   const response = await api.get('/list', { params });
+//   return response.data.data;
+// };
+
+//Show User List
+export const fetchUsers = async (token: string | null, params?: { sortBy?: string; sortOrder?: 'asc' | 'desc'; filter?: string }) => {
+  //console.log("Token received in fetchUsers:", token); // Debug token
+  const config = {
+    params,
+    headers: {
+      Authorization: token ? `Bearer ${token}` : undefined, // Include Bearer token
+    },
+  };
+
+  //console.log("Request config for /list:", config); // Debug config
+  try {
+    const response = await api.get('/list', config);
+    return response.data.data;
+  } catch (error) {
+    console.error(error); // Debug error
+    throw error; // Re-throw for handling in the component
+  }
 };
 
-// Create a new user
-export const createUser = async (user: User) => {
+//Create User
+export const createUser = async (user: User): Promise<User> => {
   const response = await api.post('/create', user);
   return response.data;
 };
 
+//Update User
 export const updateUser = async (id: number, user: Partial<User>) => {
   try {
     const response = await api.put(`/update/${id}`, user); // Use api.put here

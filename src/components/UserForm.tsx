@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { User } from '../api/itemsService';
+import { User, fetchUsers } from '../api/itemsService';
+import { useQuery } from 'react-query';
+import { useAuth } from '../contexts/AuthContext';
 
 interface UserFormProps {
   onSubmit: (user: User) => void;
@@ -13,14 +15,23 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit, initialData, onClose }) =
   const [password, setPassword] = useState('');
   const [role, setRole] = useState(initialData?.role || '');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { token, isLoading } = useAuth(); 
+
+  const { data: user, refetch } = useQuery('users', () => fetchUsers(token), {
+    enabled: !isLoading && token !== null, 
+  });
+
+  const handleSubmit  = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit({ id: initialData?.id, name, email, password, role });
     setName('');  // Clear the form fields after submit
     setEmail('');
     setPassword('');
     setRole('');
+    await refetch();
     onClose();  // Close the modal after submission
+ 
+    
   };
 
   useEffect(() => {

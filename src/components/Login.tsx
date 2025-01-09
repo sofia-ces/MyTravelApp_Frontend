@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { login } from '../api/itemsService'; // Import the login function
+import { login } from '../api/authService'; // Import the login function
 import '../styles/Login.css';
+import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
+
 
 interface LoginProps {
   onLoginSuccess: (token: string) => void; // Pass token back to App
@@ -11,6 +14,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,17 +23,24 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
 
     try {
       const data = await login({ email, password });
-         if (data['code']==422){
+      if (data['code'] == 422) {
         setLoginError('Invalid username or password.');
-           
-      }else{
+      } else {
         setLoginError('');
-        const { token } = data; // Assuming the API response contains a token
-        onLoginSuccess(token); // Pass the token to App
-        
+        const { token } = data;
+        onLoginSuccess(token); // Update token
+        navigate('/user-list'); // Navigate to travel plans
       }
-    } catch (error: any) {
-      setLoginError(error.response?.data?.message || 'Login failed. Please try again.');
+    } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          // Handle AxiosError specifically
+          setLoginError(
+            error.response?.data?.message || 'Login failed. Please try again.'
+          );
+        } else {
+          // Handle other unexpected errors
+          setLoginError('An unexpected error occurred.');
+        }
     } finally {
       setIsLoading(false);
     }

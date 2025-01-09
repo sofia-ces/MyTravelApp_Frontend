@@ -1,6 +1,6 @@
 import { api } from './api';
 
-export interface User {
+export interface Travel {
     id: number;
     destination: string;
     start_date: string;
@@ -15,12 +15,12 @@ export const fetchTravel = async (params?: { sortBy?: string; sortOrder?: 'asc' 
 };
 
 // Create a new user
-export const createTravel = async (user: User) => {
+export const createTravel = async (user: Travel) => {
   const response = await api.post('/travel/create', user);
   return response.data;
 };
 
-export const updateTravel = async (id: number, user: Partial<User>) => {
+export const updateTravel = async (id: number, user: Partial<Travel>) => {
   try {
     const response = await api.put(`/travel/update/${id}`, user); // Use api.put here
     return response.data;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import UserForm from './UserForm';
-import { createUser, updateUser, fetchUsers } from '../api/itemsService';
+import { createUser, updateUser,User } from '../api/itemsService';
 
 const ParentComponent: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

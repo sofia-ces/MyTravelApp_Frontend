@@ -1,4 +1,4 @@
-// src/services/foursquareService.ts
+
 import axios from 'axios';
 
 const FOURSQUARE_API_KEY = "YOUR-API-KEY";
@@ -22,6 +22,9 @@ export const fetchLocationDetails = async (location: string) => {
       imageUrl: place.photos ? place.photos[0]?.prefix + 'original' + place.photos[0]?.suffix : 'No image available',
     };
   } catch (error) {
+    console.error('Error fetching location details', error);
     throw new Error('Error fetching location details');
   }
+
+  
 };

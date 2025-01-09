@@ -21,8 +21,9 @@ const WikipediaWidget: React.FC = () => {
         setResults([]);
         setError('No results found.');
       }
-    } catch (err) {
+    } catch (error) {
       setError('An error occurred while fetching data.');
+      console.log('An error occurred while fetching data.', error);
     }
   };
 

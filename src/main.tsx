@@ -20,6 +20,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'; // React 18 uses react-dom/client
 import App from './App'; // Your main App component
+import { AuthProvider} from './contexts/AuthContext';
+
 //import './index.css'; // Include any global styles
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -35,9 +37,13 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+   
+     <AuthProvider> {/* AuthProvider wraps everything */}
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
      <QueryClientProvider client={queryClient}>
     <App />
+    
     </QueryClientProvider>
+    </AuthProvider>
   </React.StrictMode>
 );

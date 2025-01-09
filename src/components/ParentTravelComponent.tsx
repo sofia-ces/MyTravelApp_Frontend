@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import TravelForm from './TravelForm';
-import { createTravel, updateTravel, fetchTravel } from '../api/travelService';
+import { createTravel, updateTravel, Travel } from '../api/travelService';
 
 const ParentTravelComponent: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentTravel, setcurrentTravel] = useState(null);
+  const [currentTravel] = useState(null);
 
-  const handleCreateUser = async (userData: User) => {
+  const handleCreateUser = async (userData: Travel) => {
     try {
       await createTravel(userData);
       // Refresh user list or take other actions after creation
@@ -15,7 +15,7 @@ const ParentTravelComponent: React.FC = () => {
     }
   };
 
-  const handleUpdateUser = async (userData: User) => {
+  const handleUpdateUser = async (userData: Travel) => {
     if (currentTravel) {
       try {
         await updateTravel(currentTravel.id, userData);
@@ -33,7 +33,6 @@ const ParentTravelComponent: React.FC = () => {
       {isModalOpen && (
         <TravelForm
           onSubmit={currentTravel ? handleUpdateUser : handleCreateUser}
-          initialData={currentTravel}
           onClose={() => setIsModalOpen(false)}
         />
       )}

@@ -1,26 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { fetchWeatherData } from '../api/weatherService';
-import { fetchLocationDetails } from '../api/locationService'; // The Geoapify service you just created
 
 
 const WeatherWidget: React.FC = () => {
-  const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+ // const [setCurrentTime] = useState(new Date().toLocaleTimeString());
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState<any>(null);
-  const [location, setLocation] = useState('');
-  const [locationDetails, setLocationDetails] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [weatherNotFound, setWeatherNotFound] = useState<boolean>(false);
-  const [locationNotFound, setLocationNotFound] = useState<boolean>(false);
-
-  // Update the clock every second
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date().toLocaleTimeString());
-    }, 1000);
-
-    return () => clearInterval(timer); // Cleanup on unmount
-  }, []);
 
   // Handle weather search
   const handleWeatherSearch = async (e: React.FormEvent) => {
@@ -36,27 +23,9 @@ const WeatherWidget: React.FC = () => {
       }
     } catch (error) {
       setError('Unable to fetch weather data. Please check the city name.');
+      console.error('Unable to fetch weather data. Please check the city name.',error);
       setWeather(null);
       setWeatherNotFound(false);
-    }
-  };
-
-  // Handle location search
-  const handleLocationSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const locationData = await fetchLocationDetails(location);
-      if (!locationData || locationData.features.length === 0) {
-        setLocationNotFound(true);
-      } else {
-        setLocationDetails(locationData);
-        setLocationNotFound(false);
-        setError('');
-      }
-    } catch (err) {
-      setError('Unable to fetch location data.');
-      setLocationDetails(null);
-      setLocationNotFound(false);
     }
   };
 
